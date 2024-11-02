@@ -1,13 +1,272 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --Primary-Blue: #3B82F6;
+  --Dark-Blue: #1e40af;
+  --Medium-Blue: #3B82F6;
+  --Light-Blue: #3b83f625;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  background: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+body {
+  background-color: var(--Light-Blue);
+  font-family: Arial, sans-serif;
+  color: var(--Dark-Blue);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1001;
+  align-items: center;
+  padding: 20px 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #E2EDFD;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 300px;
+  border: 2px solid var(--Medium-Blue);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.search :is(input, button) {
+  all: unset;
+}
+
+.add-list-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 120px;
+  z-index: 1;
+}
+
+.AddList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+}
+
+.AddList-IsOpen {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  inset: 0 0 0 0;
+  background: #E2EDFD;
+  height: 450px;
+}
+
+.AddList form {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.AddList :is(input, textarea) {
+  outline: none;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 18px;
+  padding: 10px;
+  color: #000;
+  border: 2px solid var(--Medium-Blue);
+  border-radius: 5px;
+}
+
+.AddList :is(input, textarea):focus {
+  background: #3b83f659;
+}
+
+.AddList textarea {
+  height: 100px;
+  resize: none;
+}
+
+.AddList button {
+  margin-top: 10px;
+  background-color: var(--Medium-Blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.more {
+  position: fixed;
+  top: 200px;
+  right: 100px;
+}
+
+.more button {
+  all: unset;
+}
+
+.TodoLists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 200px;
+  max-height: 70dvh;
+  overflow-y: auto;
+  position: relative;
+  top: 250px;
+  padding-bottom: 100px;
+}
+
+.empty {
+  width: 96%;
+  border: 2px solid var(--Medium-Blue);
+  padding: 20px;
+  border-radius: 9px;
+  height: 100px;
+  font-size: 1.2rem;
+  background-color: rgba(59, 131, 246, 0.178);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.TodoCard {
+  border: 2px solid var(--Medium-Blue);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 200px;
+  position: relative;
+}
+
+.list-action {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 20px;
+}
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 64, 175, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  color: var(--Dark-Blue);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal button {
+  margin: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: var(--Medium-Blue);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.modal button:last-child {
+  background-color: #ccc;
+}
+
+
+aside {
+  background-color: #E2EDFD;
+  position: fixed;
+  right: 0;
+  bottom: 55px;
+  width: 300px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+aside h2 {
+  margin-bottom: 20px;
+}
+
+aside hr {
+  margin: 20px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--Dark-Blue);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  z-index: 1001;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .TodoLists {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+
+  .TodoCard {
+    max-width: calc(1000% - 10px);
+  }
 }
