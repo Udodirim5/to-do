@@ -10,6 +10,7 @@
   padding: 0;
   background: none;
   scrollbar-width: none;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -33,9 +34,8 @@ body {
 .header {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 90%;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   z-index: 1001;
@@ -55,8 +55,9 @@ body {
   font-size: 18px;
 }
 
-.search :is(input, button) {
+.search input {
   all: unset;
+  width: 100%;
 }
 
 .add-list-div {
@@ -74,6 +75,11 @@ body {
   align-items: center;
   padding: 20px;
   position: absolute;
+}
+
+.AddList h2 {
+  font-size: 36px;
+  text-align: center;
 }
 
 .AddList-IsOpen {
@@ -178,8 +184,6 @@ body {
   bottom: 20px;
 }
 
-
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -207,6 +211,7 @@ body {
   padding: 8px 16px;
   border: none;
   background-color: var(--Medium-Blue);
+  color: #fff;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -215,14 +220,13 @@ body {
   background-color: #ccc;
 }
 
-
 aside {
   background-color: #E2EDFD;
   position: fixed;
   right: 0;
   bottom: 55px;
   width: 300px;
-  height: 350px;
+  height: 390px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -259,14 +263,74 @@ footer {
 
 
 
-@media (max-width: 768px) {
-  .TodoLists {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    padding: 10px 20px;
   }
 
+  .search {
+    width: 250px;
+    font-size: 16px;
+  }
+
+  .AddList form {
+    width: 100%;
+    padding: 15px;
+  }
+
+  aside {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .AddList h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .TodoLists {
+    grid-template-columns: 1fr;
+  }
 
   .TodoCard {
-    max-width: calc(1000% - 10px);
+    width: 100%;
+  }
+
+  .more {
+    position: absolute;
+    top: -100px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .TodoLists {
+    padding-bottom: 50px;
+  }
+
+  footer {
+    font-size: 1rem;
+  }
+
+  .more {
+    top: 150px;
+    right: 20px;
   }
 }

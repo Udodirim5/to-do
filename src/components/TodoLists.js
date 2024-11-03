@@ -1,15 +1,20 @@
 import { Button } from "./Button";
 
-const TodoLists = ({ items, onDeleteItem, onToggleCompleted, selectedOption }) => {
-  let sortedItem;
+const TodoLists = ({ items, onDeleteItem, onToggleCompleted, selectedOption, searchTerm }) => {
+  // Filter items based on the query (if provided)
+  let filteredItems = items.filter(item =>
+    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  if (selectedOption === "input") sortedItem = items;
+  // Apply sorting based on selected option
+  let sortedItem;
+  if (selectedOption === "input") sortedItem = filteredItems;
   if (selectedOption === "title")
-    sortedItem = items
+    sortedItem = filteredItems
       .slice()
       .sort((a, b) => a.description.localeCompare(b.description));
   if (selectedOption === "completed")
-    sortedItem = items
+    sortedItem = filteredItems
       .slice()
       .sort((a, b) => Number(a.completed) - Number(b.completed));
 
@@ -30,6 +35,8 @@ const TodoLists = ({ items, onDeleteItem, onToggleCompleted, selectedOption }) =
     </div>
   );
 };
+
+
 const TodoCard = ({ item, onDeleteItem, onToggleCompleted }) => {
   return (
     <div className="TodoCard" style={item.completed ? { opacity: "0.4" } : {}}>
