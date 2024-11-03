@@ -1,4 +1,4 @@
-export const Button = ({ text, color, bgColor, onClick }) => {
+const Button = ({ text, color, bgColor, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -16,3 +16,5 @@ export const Button = ({ text, color, bgColor, onClick }) => {
     </button>
   );
 };
+
+export default Button;

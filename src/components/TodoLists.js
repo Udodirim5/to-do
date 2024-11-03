@@ -1,9 +1,15 @@
-import { Button } from "./Button";
+import TodoCard from "./TodoCard";
 
-const TodoLists = ({ items, onDeleteItem, onToggleCompleted, selectedOption, searchTerm }) => {
+const TodoLists = ({
+  items,
+  onDeleteItem,
+  onToggleCompleted,
+  selectedOption,
+  searchTerm,
+}) => {
   // Filter items based on the query (if provided)
-  let filteredItems = items.filter(item =>
-    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  let filteredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Apply sorting based on selected option
@@ -32,29 +38,6 @@ const TodoLists = ({ items, onDeleteItem, onToggleCompleted, selectedOption, sea
       ) : (
         <p className="empty">No tasks to display</p>
       )}
-    </div>
-  );
-};
-
-
-const TodoCard = ({ item, onDeleteItem, onToggleCompleted }) => {
-  return (
-    <div className="TodoCard" style={item.completed ? { opacity: "0.4" } : {}}>
-      <h1>{item.title}</h1>
-      <p>{item.description}</p>
-      <div className="list-action">
-        <Button
-          text="Mark as Completed"
-          color="#3B82F6"
-          onClick={() => onToggleCompleted(item.id)}
-        />
-        <Button
-          text="Delete Task"
-          color="#fff"
-          bgColor="#3B82F6"
-          onClick={() => onDeleteItem(item.id)}
-        />
-      </div>
     </div>
   );
 };

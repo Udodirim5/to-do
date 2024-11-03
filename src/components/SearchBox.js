@@ -3,7 +3,7 @@ const SearchBox = ({searchTerm, onSearchInput}) => {
     <form className="search">
       <input
         type="search"
-        placeholder="Search..."
+        placeholder="Search by title..."
         value={searchTerm}
         onChange={onSearchInput}
       />
